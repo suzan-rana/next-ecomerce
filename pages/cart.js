@@ -23,10 +23,17 @@ const Cart = () => {
   useEffect(() => setShowCart(false), []);
   const EmptyCart = () => {
     return (
-      <Container>
-        {" "}
+      <Container maxWidth="200px">
         <Grid>
-          NO items in cart. <Link href="/"> Start shopping now</Link>
+          <Typography variant="h2">
+            No items in cart.  
+            <Link
+              href="/"
+              
+            >
+              <a style={{paddingLeft:'15px', textDecoration: "underline", color: "blue" }}>Start shopping now</a>
+            </Link>
+          </Typography>
         </Grid>{" "}
       </Container>
     );
@@ -36,24 +43,25 @@ const Cart = () => {
     return (
       <>
         <Container>
-          <Stack direction='row' alignItems='center' marginBottom='2rem'>
+          <Stack direction="row" alignItems="center" marginBottom="2rem">
             <Typography
               color="rgb(60 64 67)"
               variant="h1"
               fontSize="2.5rem"
               fontWeight="500"
-              
             >
               Your Shopping Cart
             </Typography>
-            <Typography fontStyle='italic' fontSize="1.5rem" marginLeft='2rem'>({totalQuantitites} items)</Typography>
+            <Typography fontStyle="italic" fontSize="1.5rem" marginLeft="2rem">
+              ({totalQuantitites} items)
+            </Typography>
           </Stack>
 
           <Grid container spacing={4} marginBottom="3rem">
             {cartItems.map((item) => {
               return (
-                <Grid key={item._id}  item xs={12} md={6}>
-                  <CartItem  item={item} />
+                <Grid key={item._id} item xs={12} md={6}>
+                  <CartItem item={item} />
                 </Grid>
               );
             })}
