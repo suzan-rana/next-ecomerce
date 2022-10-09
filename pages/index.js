@@ -34,7 +34,7 @@ const getStaticProps = async () => {
   const query = `*[_type == "product" ]`;
   const products = await client.fetch(query);
 
-  console.log(products);
+  
 
   return {
     props: {

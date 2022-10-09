@@ -74,16 +74,15 @@ const StateContext = ({ children }) => {
     );
     const updatedCart = cartItems.filter((item) => item._id !== id);
     setCartItems(updatedCart);
-    console.log("Total Price is:", totalPrice);
-    console.log("Total Quantities is:", totalQuantitites);
+    
   };
 
 
   //increase from cart
   const toggleQuantityFromCart = (id, value) => {
     const item = cartItems.find( element => element._id === id)
-    const updatedCartItem = []
-    console.log(value)
+
+    
     if( value == 'INC') {
         const updatedCartItem = cartItems.map( cartItem => {
             if( cartItem._id === id ) {

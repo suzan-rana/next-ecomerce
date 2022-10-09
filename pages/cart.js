@@ -10,6 +10,8 @@ import {
 } from "@mui/material";
 import { CartItem } from "../components";
 import Link from "next/link";
+import getStripe from "../lib/getStripe";
+import toast from "react-hot-toast";
 
 const Cart = () => {
   const {
@@ -21,6 +23,29 @@ const Cart = () => {
     totalQuantitites,
   } = useStateContext();
   useEffect(() => setShowCart(false), []);
+//handleCheckout
+const handleCheckout = async () => {
+  const stripe = await getStripe();
+  const response = await fetch('/api/stripe/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(cartItems)
+  })
+  const data = await response.json();
+  if( data.statusCode === 500) return;
+
+  
+  // console.log(data)
+  toast.loading('Redirecting...')
+  
+  stripe.redirectToCheckout({
+    sessionId: data.id
+  })
+}
+
+
   const EmptyCart = () => {
     return (
       <Container maxWidth="200px">
@@ -104,8 +129,8 @@ const Cart = () => {
                 </Typography>
               </Grid>
               <Grid item>
-                <Button color="primary" variant="contained">
-                  <Link href="/checkout">Pay with Stripe</Link>
+                <Button color="primary" variant="contained" onClick={handleCheckout}>
+                  Pay with Stripe
                 </Button>
               </Grid>
             </Grid>

@@ -14,7 +14,7 @@ import useStateContext from "../context/StateContext";
 
 const CartItem = ({ item }) => {
   const { removeFromCart, toggleQuantityFromCart } = useStateContext();
-  console.log(item);
+  
   return (
     <Card width="40%">
       <Stack
